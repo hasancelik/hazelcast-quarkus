@@ -1,4 +1,4 @@
-name: build
+name: Guide Web Site Deploy
 
 on:
   push:
@@ -7,9 +7,9 @@ on:
       - 'doc/**'
 
 jobs:
-  build:
+  antora:
     runs-on: ubuntu-latest
-
+    container: antora/antora
     steps:
       - uses: actions/checkout@v2.3.1
         with:
@@ -17,3 +17,12 @@ jobs:
 
       - name: Check file structure
         run: ls -al
+
+      - name: Build website docs
+        run: antora --clean --fetch --to-dir ./docs antora-playbook.yml
+
+      - name: Copy .nojekyll file into docs
+        run: cp .nojekyll ./docs
+
+      - name: Check docs file structure
+        run: ls -al ./docs
