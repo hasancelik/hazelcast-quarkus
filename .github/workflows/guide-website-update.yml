@@ -20,7 +20,8 @@ jobs:
         run: |
           apk add --no-cache git
           git init
-          git pull
+          git remote -v
+          git pull origin master
 
       - name: Build website artifacts
         run: |
