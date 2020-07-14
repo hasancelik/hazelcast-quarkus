@@ -14,6 +14,7 @@ jobs:
         with:
           repository: hasancelik/guides-site
           ref: master
+          token: ${{ secrets.SECRET_TOKEN }}
 
       - name: Install Antora
         run: |
@@ -28,9 +29,9 @@ jobs:
           cp .nojekyll ./docs
 
       - name: Push artifacts to guides-site repo
-        uses: actions-x/commit@v1
-        with:
-          email: hasan@hazelcast.com
-          branch: master
-          files: docs
-          token: ${{ secrets.SECRET_TOKEN }}
+        run: |
+          git config --global user.name 'hasancelik'
+          git config --global user.email 'hasan@hazelcast.com'
+          git commit -am "${GITHUB_REPOSITORY} guide update"
+          git remote -v
+          git push
