@@ -33,5 +33,4 @@ jobs:
           email: hasan@hazelcast.com
           branch: master
           files: docs
-          repository: https://github.com/hasancelik/guides-site
           token: ${{ secrets.SECRET_TOKEN }}
