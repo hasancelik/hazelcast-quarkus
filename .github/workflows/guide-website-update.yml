@@ -9,19 +9,19 @@ on:
 jobs:
   antora:
     runs-on: ubuntu-latest
-    container: antora/antora:2.3.3
     steps:
       - uses: actions/checkout@v2.3.1
         with:
           repository: hasancelik/guides-site
           ref: master
 
-      - name: Install Git and Create .git file
+      - name: Install Antora
         run: |
-          apk add --no-cache git
-          git init
-          git remote add origin https://github.com/hasancelik/guides-site.git
-          git pull origin master
+          apt update
+          apt install curl
+          curl -sL https://deb.nodesource.com/setup_8.x | bash -
+          apt install nodejs
+          npm i -g @antora/cli@2.3 @antora/site-generator-default@2.3
 
       - name: Build website artifacts
         run: |
