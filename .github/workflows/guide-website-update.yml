@@ -21,14 +21,16 @@ jobs:
           apk add --no-cache git
           git init
 
-      - name: Check file structure
-        run: ls -al
+      - name: Build website artifacts
+        run: |
+          antora --clean --fetch --to-dir ./docs antora-playbook.yml
+          cp .nojekyll ./docs
 
-      - name: Build website docs
-        run: antora --clean --fetch --to-dir ./docs antora-playbook.yml
-
-      - name: Copy .nojekyll file into docs
-        run: cp .nojekyll ./docs
-
-      - name: Check docs file structure
-        run: ls -al ./docs
+      - name: Push artifacts to guides-site repo
+        uses: actions-x/commit@v1
+        with:
+          email: hasan@hazelcast.com
+          branch: master
+          files: docs
+          repository: https://github.com/hasancelik/guides-site
+          token: ${{ secrets.SECRET_TOKEN }}
