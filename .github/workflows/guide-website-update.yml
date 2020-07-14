@@ -26,9 +26,6 @@ jobs:
           antora --clean --fetch --to-dir ./docs antora-playbook.yml
           cp .nojekyll ./docs
 
-      - name: Commit guides-site changes
-        run: git commit -am "${GITHUB_REPOSITORY} "
-
       - name: Push artifacts to guides-site repo
         uses: actions-x/commit@v1
         with:
