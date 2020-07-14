@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2.3.1
         with:
-          repository: hazelcast-guides/guides-site
+          repository: hasancelik/guides-site
           ref: master
 
       - name: Install Git and Create .git file
