@@ -17,10 +17,8 @@ jobs:
 
       - name: Install Antora
         run: |
-          sudo apt update
-          sudo apt install curl
           curl -sL https://deb.nodesource.com/setup_8.x | bash -
-          sudo apt install nodejs
+          apt install nodejs
           npm i -g @antora/cli@2.3 @antora/site-generator-default@2.3
 
       - name: Build website artifacts
