@@ -1,19 +1,34 @@
-name: build
+name: Guide Web Site Deploy
 
 on:
   push:
-    branches: antora
+    branches: antora-deploy-build
     paths:
       - 'doc/**'
 
 jobs:
-  build:
+  antora:
     runs-on: ubuntu-latest
-
+    container: antora/antora:2.3.3
     steps:
       - uses: actions/checkout@v2.3.1
         with:
           repository: hazelcast-guides/guides-site
+          ref: master
+
+      - name: Install Git and Create .git file
+        run: |
+          apk add --no-cache git
+          git init
 
       - name: Check file structure
         run: ls -al
+
+      - name: Build website docs
+        run: antora --clean --fetch --to-dir ./docs antora-playbook.yml
+
+      - name: Copy .nojekyll file into docs
+        run: cp .nojekyll ./docs
+
+      - name: Check docs file structure
+        run: ls -al ./docs
