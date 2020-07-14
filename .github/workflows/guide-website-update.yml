@@ -18,6 +18,9 @@ jobs:
       - name: Check file structure
         run: ls -al
 
+      - name: Git init
+        run: git init
+
       - name: Build website docs
         run: antora --clean --fetch --to-dir ./docs antora-playbook.yml
 
