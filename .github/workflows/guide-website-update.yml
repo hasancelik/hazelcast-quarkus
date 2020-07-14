@@ -20,7 +20,7 @@ jobs:
         run: |
           apk add --no-cache git
           git init
-          git remote -v
+          git remote add origin https://github.com/hasancelik/guides-site.git
           git pull origin master
 
       - name: Build website artifacts
